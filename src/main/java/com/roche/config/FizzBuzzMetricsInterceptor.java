@@ -9,6 +9,7 @@ import org.springframework.web.util.ContentCachingRequestWrapper;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -20,8 +21,11 @@ public class FizzBuzzMetricsInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (request.getMethod().equals("GET") && request.getRequestURI().contains("/compute")) {
-           String requestParams = getRequestParams(request);
-            metricsService.incrementMetric("requestParams: ", requestParams.toString());
+            String requestParams = getRequestParams(request);
+            Map<String,String> data=new HashMap<>();
+            data.put("endPoint",request.getRequestURI());
+            data.put("requestParams",requestParams.toString());
+            metricsService.incrementMetric(data);
         }
         return true;
     }
