@@ -28,8 +28,7 @@ public class FizzBuzzControllerTest {
     }
 
     @Test
-    public void compute_fizzBuzz() throws Exception {
-
+    public void compute_fizzBuzz_success() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/fizzbuzz/v1/compute")
                         .param("int1", "3")
                         .param("int2", "5")
@@ -40,4 +39,5 @@ public class FizzBuzzControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
 }

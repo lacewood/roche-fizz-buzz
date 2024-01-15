@@ -22,7 +22,7 @@ public class FizzBuzzServiceImpl implements FizzBuzzService {
     Logger logger = LogManager.getLogger(FizzBuzzServiceImpl.class);
 
     public List<String> compute(FizzBuzzRequest fizzBuzzRequest) {
-        int numberOfRanges = fizzBuzzRequest.getLimit() > RECORD_SIZE ? 4 : 1; // request limit size is big , create 4 threads
+        int numberOfRanges = fizzBuzzRequest.getLimit() > RECORD_SIZE ? 4 : 1; // if request limit size is big , create 4 threads
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfRanges);
         List<String> data = new ArrayList<>();
         try {
@@ -35,7 +35,7 @@ public class FizzBuzzServiceImpl implements FizzBuzzService {
                 // Calculate the end of the current range
                 rangeEnd = i * interval;
                 // Output the current range
-                logger.info("Task: {} start: {} end: {}",i,rangeStart,rangeEnd);
+                logger.info("Task: {} start: {} end: {}", i, rangeStart, rangeEnd);
                 Callable<List<String>> callable = new FizzBuzzExecutorCallable(fizzBuzzRequest.getInt1(), fizzBuzzRequest.getInt2(), fizzBuzzRequest.getStr1(), fizzBuzzRequest.getStr2(), rangeStart, rangeEnd);
                 tasks.add(callable);
                 rangeStart = rangeEnd + 1;
