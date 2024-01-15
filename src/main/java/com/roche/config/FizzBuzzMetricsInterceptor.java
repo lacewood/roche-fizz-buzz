@@ -22,9 +22,9 @@ public class FizzBuzzMetricsInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (request.getMethod().equals("GET") && request.getRequestURI().contains("/compute")) {
             String requestParams = getRequestParams(request);
-            Map<String,String> data=new HashMap<>();
-            data.put("endPoint",request.getRequestURI());
-            data.put("requestParams",requestParams.toString());
+            Map<String, String> data = new HashMap<>();
+            data.put("endPoint", request.getRequestURI());
+            data.put("requestParams", requestParams.toString());
             metricsService.incrementMetric(data);
         }
         return true;
@@ -32,11 +32,11 @@ public class FizzBuzzMetricsInterceptor implements HandlerInterceptor {
 
 
     private String getRequestParams(HttpServletRequest request) throws IOException {
-       StringBuilder sb=new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         ContentCachingRequestWrapper wrappedRequest = new ContentCachingRequestWrapper(request);
         Map<String, String[]> requestParam = wrappedRequest.getParameterMap();
-        for(Map.Entry<String, String[]> map:requestParam.entrySet()){
-            sb.append(map.getKey()+" : "+map.getValue()[0]+"; ");
+        for (Map.Entry<String, String[]> map : requestParam.entrySet()) {
+            sb.append(map.getKey() + " : " + map.getValue()[0] + "; ");
         }
         return sb.toString();
     }
