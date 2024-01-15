@@ -35,7 +35,7 @@ public class FizzBuzzControllerTest {
                         .param("int2", "5")
                         .param("str1", "fizz")
                         .param("str2", "buzz")
-                        .param("limit", "300")
+                        .param("limit", "200000")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());

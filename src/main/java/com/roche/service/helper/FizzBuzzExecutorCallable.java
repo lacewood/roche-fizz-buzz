@@ -28,7 +28,7 @@ public class FizzBuzzExecutorCallable implements Callable<List<String>> {
 
     private List<String> computeByLimit() {
         List<String> data = new ArrayList<>();
-        for (int i = this.startLimit; i < this.endLimit; i++) {
+        for (int i = this.startLimit; i <= this.endLimit; i++) {
             boolean op1 = i % this.int1 == 0;
             boolean op2 = i % this.int2 == 0;
             if (op1 && op2) {

@@ -17,14 +17,16 @@ import java.util.concurrent.Future;
 @Service
 public class FizzBuzzServiceImpl implements FizzBuzzService {
 
+    public static int RECORD_SIZE=10000;
+
     Logger logger = LogManager.getLogger(FizzBuzzServiceImpl.class);
 
     public List<String> compute(FizzBuzzRequest fizzBuzzRequest) {
-        int numberOfRanges = 1;
+        int numberOfRanges = fizzBuzzRequest.getLimit() > RECORD_SIZE ? 1 : 4;
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfRanges);
         List<String> data = new ArrayList<>();
         try {
-            int rangeStart = 0;
+            int rangeStart = 1;
             int rangeEnd;
             // Calculate the interval between each range
             int interval = fizzBuzzRequest.getLimit() / numberOfRanges;
