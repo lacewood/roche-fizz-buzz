@@ -8,7 +8,6 @@ import org.springframework.web.util.ContentCachingRequestWrapper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public class FizzBuzzMetricsInterceptor implements HandlerInterceptor {
     private FizzBuzzMetricsService metricsService;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (request.getMethod().equals("GET") && request.getRequestURI().contains("/compute")) {
             String requestParams = getRequestParams(request);
             Map<String, String> data = new HashMap<>();
@@ -31,7 +30,7 @@ public class FizzBuzzMetricsInterceptor implements HandlerInterceptor {
     }
 
 
-    private String getRequestParams(HttpServletRequest request) throws IOException {
+    private String getRequestParams(HttpServletRequest request) {
         StringBuilder sb = new StringBuilder();
         ContentCachingRequestWrapper wrappedRequest = new ContentCachingRequestWrapper(request);
         Map<String, String[]> requestParam = wrappedRequest.getParameterMap();

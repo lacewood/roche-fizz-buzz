@@ -16,8 +16,8 @@ public class MetricsController {
     private FizzBuzzMetricsService metricsService;
 
     @GetMapping("/metrics")
-    public Map<String, Long> getCustomEndpointMetrics() {
-        return metricsService.getAllMetrics();
+    public Map<String, String> getCustomEndpointMetrics() {
+        return metricsService.getMostFrequentRequestMetrics();
     }
 }
 

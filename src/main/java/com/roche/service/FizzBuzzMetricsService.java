@@ -18,9 +18,17 @@ public class FizzBuzzMetricsService {
         apiMetrics.computeIfAbsent(map.toString(), k -> new AtomicLong()).incrementAndGet();
     }
 
-    public Map<String, Long> getAllMetrics() {
+    public Map<String, String> getMostFrequentRequestMetrics() {
+        Map<String,String> mostFrequentRequest = new HashMap<>();
         Map<String, Long> result = new HashMap<>();
         apiMetrics.forEach((key, value) -> result.put(key, value.get()));
-        return result;
+        Optional<Map.Entry<String, Long>> maxEntry = result.entrySet()
+                .stream()
+                .max(Comparator.comparing(Map.Entry::getValue));
+        if(maxEntry.isPresent()){
+            mostFrequentRequest.put("api",maxEntry.get().getKey());
+            mostFrequentRequest.put("hitCount", String.valueOf(maxEntry.get().getValue()));
+        }
+        return mostFrequentRequest;
     }
 }

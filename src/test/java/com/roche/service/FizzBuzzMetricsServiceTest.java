@@ -19,7 +19,7 @@ public class FizzBuzzMetricsServiceTest {
         Map<String,String> map=new HashMap<>();
         map.put("endpoint","/abcd");
         fizzBuzzMetricsService.incrementMetric(map);
-        Map<String, Long> result = fizzBuzzMetricsService.getAllMetrics();
+        Map<String, String> result = fizzBuzzMetricsService.getMostFrequentRequestMetrics();
         Assert.assertNotNull(result);
     }
 
